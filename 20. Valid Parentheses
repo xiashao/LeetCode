@@ -1,0 +1,28 @@
+要点：
+  1.字典的使用。map['{']='}'
+  2.符号是成双成对出现，第一次'{'的字典对应'}'被收入到stack后，第二次'}'没有在字典中所以他和stack最上面的字符是一致的。
+  3.pop（）移出并赋值最后一个元素
+  4.stack为空表示所有字符都是成对的
+class Solution:
+    def isValid(self,s):
+      stack = []
+      map = {
+        "{":"}",
+        "[":"]",
+        "(":")"
+      }
+      for x in s:
+        if x in map:
+          stack.append(map[x])
+        else:
+          if len(stack)!=0:
+            top_element = stack.pop()
+            if x != top_element:
+              return False
+            else:
+              continue
+          else:
+            return False
+      return len(stack) == 0
+      
+      
